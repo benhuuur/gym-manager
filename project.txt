@@ -1,0 +1,37 @@
+1 - login
+    cpf:
+    senha:
+
+2 - registro (adm)
+    nome:
+    email:
+    cpf:
+    data de nascimento(idade):
+
+    
+3 - home (usuário)
+        
+    (1° vez na home preeenche os dados) dados de treino:
+        peso
+        altura
+        objetivo
+        experiencia
+        obervações
+        tempo de treino
+        dias de treino(qtd)
+    
+    oq aparece
+        dados
+        check de obejtivos
+        acompanhar evoluação
+
+5 - treino
+    ficha de treino 
+    aba de axercicios
+
+4 - home (adm)
+        
+    visualizar todos as pessoas
+    resgitrar nova pessoa
+    dados detalhados da pessoa
+    apagar pessoas
