@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+
+//Fontes
+import "./Fonts/Asap-Bold.otf";
+import "./Fonts/Asap-Medium.otf"
+
+//Pages
+import HomeAdmPage from './page/HomeAdm';
+import HomeUserPage from './page/HomeUsuario';
+import LoginPage from './page/Login';
+import RegisterPage from './page/Registro';
+import ViewUserSheet from './page/VizualizarFichaUsuario';
+
+//Components
+import NavbarComponent from './components/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavbarComponent/>
+      <Routes>
+        <Route path="/" element={<LoginPage/>} />
+        <Route path="/home-adm" element={<HomeAdmPage/>} />
+        <Route path="/home-user" element={<HomeUserPage/>} />
+        <Route path="/view-user-sheet" element={<ViewUserSheet/>} />
+        <Route path="/register" element={<RegisterPage/>} />
+      </Routes>
+    </>
   );
 }
 
