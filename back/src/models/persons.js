@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { gymSchema } = require("./gym");
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -43,6 +44,10 @@ const personSchema = new mongoose.Schema({
   },
   isFirst: {
     type: Boolean,
+    required: true,
+  },
+  gym: {
+    type: gymSchema,
     required: true,
   },
 });

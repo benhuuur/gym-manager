@@ -40,6 +40,9 @@ class LoginController {
       return res.status(500).send({ message: error });
     }
   }
+  static async create(user){
+
+  }
 }
 
 module.exports = LoginController;

@@ -6,10 +6,6 @@ const gymSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  persons: {
-    type: [personSchema],
-    required: true,
-  },
 });
 
 const Gym = mongoose.model("Gyms", gymSchema);
