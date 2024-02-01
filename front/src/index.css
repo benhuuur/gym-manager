@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "Medium";
+  src: local("Asap-Medium"),
+    url("./Fonts/Asap-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bold";
+  src: local("Asap-Bold"),
+    url("./Fonts/Asap-Bold.otf") format("truetype");
+}
+
