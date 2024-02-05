@@ -31,5 +31,4 @@ class GymController {
     }
   }
 }
-
 module.exports = GymController;

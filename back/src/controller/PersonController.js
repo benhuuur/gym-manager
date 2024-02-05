@@ -62,7 +62,7 @@ class PersonController {
 
   static async delete(req, res) {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       UserController.delete(id);
       Person.findByIdAndDelete(id);
     } catch (error) {
