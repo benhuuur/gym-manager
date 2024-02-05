@@ -1,0 +1,19 @@
+.card{
+    position: fixed;
+    top: 25vh;
+    &__header{
+        display: flex;
+        border: none !important;
+        align-items: center;
+        justify-content: center;
+    }
+    &__form{
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
+        
+        &__button{
+            width: 100%;
+        }
+    }
+}
