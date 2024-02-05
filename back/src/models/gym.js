@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const { personSchema } = require("./persons");
 
 const gymSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   equipments: {
     type: [String],
     required: true,
