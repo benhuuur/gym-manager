@@ -52,17 +52,9 @@ const personSchema = new mongoose.Schema({
   },
 });
 
-const getAllData = async () => {
-  return Person.find({})
-    .then(person => {})
-    .catch(error => {
-      throw error;
-    });
-};
-
 const Person = mongoose.model("Persons", personSchema);
 
 
 exports.Person = Person;
 exports.personSchema = personSchema;
-exports.getAllData = getAllData;
+
