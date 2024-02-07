@@ -9,36 +9,9 @@ import { LoginContext } from "../../context/LoginContext";
 import { AlertContext } from "../../context/AlertContext";
 
 
-export default function CardCompleteLogin() {
-    const { setMessage, setShow, setVariant } = useContext(AlertContext);
-    const {cpf, password, setPassword} = useContext(LoginContext);
-    const navigate = useNavigate();
+export default function CardRegister() {
 
-    async function handleSubimit(e) {
-        // e.preventDefaunt();
-        // if (!loginValid) return
-        // const json = {
-        //     email, password
-        // }
-        // try {
-        //     const jsonCrypt = CryptoJS.AES.encrypt(JSON.stringify(json), SECRET).toString();
-        //     var res = await axios.post('http://localhost:8080/api/user/password/login,', {
-        //         jsonCrypt
-        //     })
-        //     console.log(res);
-        //     sessionStorage.setItem('token', res.toFormData.token);
-        //     navigate('/completelogin')
-        // }
-        // catch (error) {
-        //     console.log(error)
-        //     setMessage('Falha no Login, verifique os dados e tente novamente')
-        //     setShow(true);
-        //     setVariant('danger');
-        // }
-
-    }
-
-    function loginValid() {
+    function registerValid() {
 
     }
 
@@ -46,10 +19,10 @@ export default function CardCompleteLogin() {
         <>
             <Card  border="dark" className={styles.card} bg='dark' text='warning'>
                 <Card.Header className={styles.card__header}>
-                    <Card.Title>Complete seu Login</Card.Title>
+                    <Card.Title>Registre um novo Aluno</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <Form
+                    {/* <Form
                         className={styles.card__form}
                         onSubmit={handleSubimit}
                     >
@@ -68,7 +41,7 @@ export default function CardCompleteLogin() {
                             type='submit'
                             variant='success'
                         > ACESSAR </Button>
-                    </Form>
+                    </Form> */}
                 </Card.Body>
             </Card>
         </>

@@ -4,15 +4,15 @@ import { Col, Row } from 'react-bootstrap';
 
 //components
 import AlertComponent from '../../components/Alert';
-import CardLogin from '../../components/CardLoginSemi';
+import CardLoginFirstStep from '../../components/CardLoginFirstStep';
 
-export default function LoginPage() {
+export default function Login() {
     return (
         <>
             <div className={styles.body}>
                 <div className={styles.container}>
                     <AlertComponent />
-                    <CardLogin />
+                    <CardLoginFirstStep />
                 </div> 
             </div>
         </>

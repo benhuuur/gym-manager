@@ -3,16 +3,16 @@ import { Col, Row } from 'react-bootstrap';
 
 //components
 import AlertComponent from '../../components/Alert';
-import CardCompleteLogin from '../../components/CardLoginComplete';
+import LoginSecondStep from '../../components/CardLoginSecondStep';
 
 
-export default function CompleteLoginPage() {
+export default function LoginFirstStep() {
     return (
         <>
            <div className={styles.body}>
            <div className={styles.container}>   
                         <AlertComponent/>
-                        <CardCompleteLogin/>
+                        <LoginSecondStep/>
            </div>
            </div>
         </>

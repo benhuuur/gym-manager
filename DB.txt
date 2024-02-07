@@ -1,0 +1,27 @@
+pessoa
+    id
+    login(cpf)
+    senha(ano de nascimento)
+    -> aluno = pode ser null
+    -> academia = pode ser null
+
+
+-> aluno
+    -> id
+    nome
+    cpf
+    data de nascimento(idade)
+    peso
+    altura
+    objetivo
+    experiencia
+    obervações
+    tempo de treino(minutos)
+    dias de treino(qtd)
+    ficha de treino
+
+-> academia
+    -> id
+    lista de aparelhos
+    -> lista de alunos
+    

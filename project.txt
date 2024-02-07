@@ -6,7 +6,6 @@ preto e roxo
 
 2 - registro (adm)
     nome:
-    email:
     cpf:
     data de nascimento(idade):
 

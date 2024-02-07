@@ -1,4 +1,4 @@
-export default function HomeAdmPage() {
+export default function AdmHome() {
     return (
         <><p>HOMEADMPAGE</p></>
     );
