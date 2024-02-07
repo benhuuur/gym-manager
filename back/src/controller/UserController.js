@@ -1,20 +1,31 @@
 const User = require("../models/user");
 const CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 class UserController {
+
   static async login(req, res) {
+    var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+    const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptd);
+    const { login } = json;
+    // const { login } = req.body;
+
+    if (!login)
+      return res.status(422).json({ message: "O login é obrigatório" });
+
+    const logged = await User.findOne({ login: login });
+    if (!logged) return res.status(422).json({ message: "Usuário inválido" });
+
+    var bytes = CryptoJS.AES.decrypt(user.login, process.env.SECRET);
+    const decryptd2 = bytes.toString(CryptoJS.enc.Utf8);
+    const json2 = JSON.parse(decryptd2);
+
+    if (json2 != login)
+      return res.status(422).send({ message: "login inválido" })
+
     try {
-      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-      // const json = JSON.parse(decryptd);
-      // const { login } = json;
-      const { login } = req.body;
-
-      if (!login)
-        return res.status(422).json({ message: "O login é obrigatório" });
-
-      const logged = await User.findOne({ login: login });
-      if (!logged) return res.status(422).json({ message: "Usuário inválido" });
       return res
         .status(200)
         .send({ message: "usuário encontrado", data: { login } });
@@ -23,26 +34,45 @@ class UserController {
     }
   }
   static async password(req, res) {
+    var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+    const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptd);
+    const { password, login } = json;
+    // const { password, login } = req.body;
+
+    if (!password)
+      return res.status(422).json({ message: "A senha é obrigatória" });
+
+    const logged = await User.findOne({ login: login, password: password });
+    if (!logged)
+      return res
+        .status(422)
+        .json({ message: "Usuário e/ou senha inválidos" });
+
+    var bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET);
+    const decryptd2 = bytes.toString(CryptoJS.enc.Utf8);
+    const json2 = JSON.parse(decryptd2);
+
+    if(json2 != password)
+      return res.satus(422).send({ message : "Senha inválida" })
+
     try {
-      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-      // const json = JSON.parse(decryptd);
-      // const { password, login } = json;
-      const { password, login } = req.body;
+      const secret = process.env.SECRET;
+      const token = jwt.sign(
+        {
+          id: user._id,
+        },
+        secret, 
+        {
+          expiresIn: '2-Days'
+        }
+      );
 
-      if (!password)
-        return res.status(422).json({ message: "A senha é obrigatória" });
-
-      const logged = await User.findOne({ login: login, password: password });
-      if (!logged)
-        return res
-          .status(422)
-          .json({ message: "Usuário e/ou senha inválidos" });
       return res
         .status(200)
-        .send({ message: "usuário encontrado", data: { logged } });
+        .send({ token: token });
     } catch (error) {
-      return res.status(500).send({ message: error });
+      return res.status(500).send({ message: "Algo deu Errado :/", data: error.message });
     }
   }
   static async create(person, gym) {
@@ -57,7 +87,7 @@ class UserController {
         login = gym.name;
         password = "1234";
       }
-     
+
       const user = {
         login,
         passwordCrypt,
