@@ -29,8 +29,7 @@ class PersonController {
       if (exist)
         return res.status(422).json({ message: "cpf inválido, ja cadastrado" });
 
-      const gym = Gym.findOne({ _id: gym_id });
-      console.log(gym);
+      const gym = await Gym.findById(gym_id);
       if (gym) return res.status(422).json({ message: "Academia inválida" });
 
       const person = new Person({
@@ -111,6 +110,18 @@ class PersonController {
         // sheet: python,
         trainingTime: trainingTime,
         isFirst: false,
+      });
+    } catch (error) {
+      return res.status(500).send({ message: error });
+    }
+  }
+
+  static async getAll(req, res) {
+    try {
+      var persons = await Person.find();
+      if (persons.length < 1) return res.status(404);
+      return res.status(200).send({
+        persons,
       });
     } catch (error) {
       return res.status(500).send({ message: error });

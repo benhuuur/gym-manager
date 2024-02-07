@@ -15,9 +15,7 @@ class UserController {
 
       const logged = await User.findOne({ login: login });
       if (!logged) return res.status(422).json({ message: "Usuário inválido" });
-      return res
-        .status(200)
-        .send({ message: "usuário encontrado", data: { login } });
+      return res.status(200).send({ message: "usuário encontrado", login });
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -38,9 +36,7 @@ class UserController {
         return res
           .status(422)
           .json({ message: "Usuário e/ou senha inválidos" });
-      return res
-        .status(200)
-        .send({ message: "usuário encontrado", data: { logged } });
+      return res.status(200).send({ message: "usuário encontrado", logged });
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -57,10 +53,10 @@ class UserController {
         login = gym.name;
         password = "1234";
       }
-     
+
       const user = {
         login,
-        passwordCrypt,
+        password,
         person,
         gym,
         createdAt: Date.now(),

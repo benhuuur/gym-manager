@@ -1,15 +1,19 @@
-
 .body {
-    background-image: url('../../assets/Background/shine.png');
-    background-size: cover;
-    height: 91vh;
+  background-image: url('../../assets/Background/shine.png');
+  background-size: cover;
+//   background-color: #2b3035;
+  height: 91vh;
 }
 
 .dropdown {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-right: 4%;
-    padding: 2%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 4%;
+  padding: 2%;
 
+  &__toggle {
+    --bs-btn-border-color: #ffff00 !important;
+    background-color: #2f2f2e !important;
+  }
 }

@@ -1,1 +1,1 @@
-export const SECRET = 'JATAPODENDOAMNOÇAR'
+export const SECRET = "ALSDNOAdjsoaijdaoHSAoi";
