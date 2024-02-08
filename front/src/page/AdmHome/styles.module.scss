@@ -1,0 +1,18 @@
+.body {
+  background-image: url("../../assets/Background/shine.png");
+  background-size: cover;
+  //   background-color: #2b3035;
+  height: 91vh;
+}
+
+.container {
+  padding: 10px;
+  &__row {
+    width: 100% !important;
+    &__col {
+      display: flex;
+      justify-content: flex-end;
+      width: 100vw !important;
+    }
+  }
+}

@@ -1,31 +1,40 @@
 import styles from "./styles.module.scss";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import ClientForm from "../../components/Forms"
+import ClientForm from "../../components/Forms";
+import { useState } from "react";
 
 export default function UserHome() {
+  const [page, setPage] = useState(true);
+  function Render() {
+    if (page) {
+      return <>Dados</>;
+    } else {
+      return <>Treino</>;
+    }
+  }
   return (
     <>
-  <ClientForm></ClientForm>
+      <ClientForm></ClientForm>
       <div className={styles.body}>
         <Dropdown className={styles.dropdown} data-bs-theme="dark">
-          <Dropdown.Toggle
+          <Dropdown.Toggle className={styles.dropdown__toggle}
             id="dropdown-button-dark-example1"
             variant="secondary"
           >
-            KKKKKKKKKKKKKKK
+            Sei la
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1" active>
-              Action
+            <Dropdown.Item onClick={() => setPage(true)}>
+              Meus dados
             </Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
+            <Dropdown.Item onClick={() => setPage(false)}>
+              Ficha de treino
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        {Render()}
       </div>
     </>
   );

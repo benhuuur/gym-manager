@@ -1,40 +1,39 @@
 const { Person, personSchema } = require("../models/people");
 const { Gym } = require("../models/gym");
 const UserController = require("../controller/UserController");
-const CryptoJS = require('crypto-js');
+const CryptoJS = require("crypto-js");
 
 class PersonController {
   static async create(req, res) {
-  try {
-    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    // const json = JSON.parse(decryptd);
-    // const { name, cpf, birth, gym_id } = json;
-    const { name, cpf, birth, gym_id } = req.body;
-    
-    if (!name)
-    return res.status(400).json({ message: "O nome é obrigatório" });
-  if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
-  if (!birth)
-  return res
-.status(400)
-.json({ message: "A data de nascimento é obrigatória" });
-if (!gym_id)
-return res
-.status(400)
-.json({ message: "A academia pertencente é obrigatória" });
+    try {
+      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      // const json = JSON.parse(decryptd);
+      // const { name, cpf, birth, gym_id } = json;
+      const { name, cpf, birth, gym_id } = req.body;
+
+      if (!name)
+        return res.status(400).json({ message: "O nome é obrigatório" });
+      if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
+      if (!birth)
+        return res
+          .status(400)
+          .json({ message: "A data de nascimento é obrigatória" });
+      if (!gym_id)
+        return res
+          .status(400)
+          .json({ message: "A academia pertencente é obrigatória" });
 
 const exist = await Person.findOne({
         cpf: cpf,
       });
       if (exist)
-      return res.status(422).json({ message: "cpf inválido, ja cadastrado" });
-    
-    const gym = await Gym.findById(gym_id);
-    console.log(gym);
-    if (!gym) return res.status(422).json({ message: "Academia inválida" });
-    
-    const person = new Person({
+        return res.status(422).json({ message: "cpf inválido, ja cadastrado" });
+
+      const gym = await Gym.findById(gym_id);
+      if (gym) return res.status(422).json({ message: "Academia inválida" });
+
+      const person = new Person({
         name,
         cpf,
         birth,
@@ -49,11 +48,11 @@ const exist = await Person.findOne({
         isFirst: false,
       });
 
-        await UserController.create(person, null)
-          await Person.create(person);
-          return res
-          .status(201)
-          .send({ message: "Usuário cadastrado com sucesso" });
+      await UserController.create(person, null);
+      await Person.create(person);
+      return res
+        .status(201)
+        .send({ message: "Usuário cadastrado com sucesso" });
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -116,25 +115,15 @@ const exist = await Person.findOne({
     }
   }
 
-  static async getAll(req, res)
-  {
+  static async getAll(req, res) {
     try {
-      const person = await Person.getAllData();
-      console.log(person);
-      return res.status(200).send({ message: "Usuários encontrados", })
-    } catch {
-
-    }
-  }
-
-  static async getById(_id)
-  {
-    try {
-      const person = await Person.findById(_id);
-      console.log(person);
-      return res.status(200).send({ message: "Usuário encontrado", person: person })
-    } catch(error) {
-      return res.status(404).send({ error: error })
+      var persons = await Person.find();
+      if (persons.length < 1) return res.status(404);
+      return res.status(200).send({
+        persons,
+      });
+    } catch (error) {
+      return res.status(500).send({ message: error });
     }
   }
 
