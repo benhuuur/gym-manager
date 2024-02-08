@@ -3,16 +3,16 @@ const CryptoJS = require("crypto-js");
 require("dotenv").config();
 
 class UserController {
-
   static async login(req, res) {
-    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    // const json = JSON.parse(decryptd);
-    // const { login } = json;
-    const { login } = req.body;
+    try {
+      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      // const json = JSON.parse(decryptd);
+      // const { login } = json;
+      const { login } = req.body;
 
-    if (!login)
-      return res.status(422).json({ message: "O login é obrigatório" });
+      if (!login)
+        return res.status(422).json({ message: "O login é obrigatório" });
 
       const logged = await User.findOne({ login: login });
       if (!logged) return res.status(422).json({ message: "Usuário inválido" });
@@ -23,14 +23,14 @@ class UserController {
   }
   static async password(req, res) {
     try {
-    var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    const json = JSON.parse(decryptd);
-    const { password, login } = json;
-    // const { password, login } = req.body;
+      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      // const json = JSON.parse(decryptd);
+      // const { password, login } = json;
+      const { password, login } = req.body;
 
-    if (!password)
-      return res.status(422).json({ message: "A senha é obrigatória" });
+      if (!password)
+        return res.status(422).json({ message: "A senha é obrigatória" });
 
       const logged = await User.findOne({ login: login, password: password });
       if (!logged)
@@ -97,27 +97,6 @@ class UserController {
       return user;
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  static async getAll()
-  {
-    try {
-      const getAllData = await User.find();
-      return getAllData;
-    }      
-    catch(error){
-      return res.status(404).send({ error: "Tabela não encontrada"})
-    }
-  }
-
-  static async getById(_id) {
-    try {
-      const user = await User.findById(_id);
-      return user;
-    }
-    catch(error){
-      return res.status(404).send({ error: "Usuário não encontrado" });
     }
   }
 }

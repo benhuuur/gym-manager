@@ -34,7 +34,7 @@ class GymController {
 
   static async getById(_id) {
     try {
-      const gym = await UserController.getById(_id);
+      const gym = await Gym.getById(_id);
       return gym.gym;
     } catch (error) {
       throw error;

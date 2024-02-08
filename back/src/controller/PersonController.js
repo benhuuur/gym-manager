@@ -70,18 +70,6 @@ const exist = await Person.findOne({
 
   static async update(req, res) {
     try {
-      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-      // const json = JSON.parse(decryptd);
-      // const {
-      //   id,
-      //   height,
-      //   weight,
-      //   objective,
-      //   experience,
-      //   frequency,
-      //   trainingTime,
-      // } = json;
       const {
         id,
         height,
