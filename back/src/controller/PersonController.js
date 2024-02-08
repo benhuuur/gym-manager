@@ -1,30 +1,30 @@
 const { Person, personSchema } = require("../models/people");
 const { Gym } = require("../models/gym");
 const UserController = require("../controller/UserController");
-const CryptoJS = require('crypto-js');
+const CryptoJS = require("crypto-js");
 
 class PersonController {
   static async create(req, res) {
-  try {
-    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    // const json = JSON.parse(decryptd);
-    // const { name, cpf, birth, gym_id } = json;
-    const { name, cpf, birth, gym_id } = req.body;
-    
-    if (!name)
-    return res.status(400).json({ message: "O nome é obrigatório" });
-  if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
-  if (!birth)
-  return res
-.status(400)
-.json({ message: "A data de nascimento é obrigatória" });
-if (!gym_id)
-return res
-.status(400)
-.json({ message: "A academia pertencente é obrigatória" });
+    try {
+      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      // const json = JSON.parse(decryptd);
+      // const { name, cpf, birth, gym_id } = json;
+      const { name, cpf, birth, gym_id } = req.body;
 
-const exist = await Person.findOne({
+      if (!name)
+        return res.status(400).json({ message: "O nome é obrigatório" });
+      if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
+      if (!birth)
+        return res
+          .status(400)
+          .json({ message: "A data de nascimento é obrigatória" });
+      if (!gym_id)
+        return res
+          .status(400)
+          .json({ message: "A academia pertencente é obrigatória" });
+
+      const exist = await Person.findOne({
         cpf: cpf,
       });
       if (exist)
@@ -48,11 +48,11 @@ const exist = await Person.findOne({
         isFirst: false,
       });
 
-        await UserController.create(person, null)
-          await Person.create(person);
-          return res
-          .status(201)
-          .send({ message: "Usuário cadastrado com sucesso" });
+      await UserController.create(person, null);
+      await Person.create(person);
+      return res
+        .status(201)
+        .send({ message: "Usuário cadastrado com sucesso" });
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -70,6 +70,18 @@ const exist = await Person.findOne({
 
   static async update(req, res) {
     try {
+      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      // const json = JSON.parse(decryptd);
+      // const {
+      //   id,
+      //   height,
+      //   weight,
+      //   objective,
+      //   experience,
+      //   frequency,
+      //   trainingTime,
+      // } = json;
       const {
         id,
         height,
