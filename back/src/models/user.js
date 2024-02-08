@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { gymSchema } = require("./gym");
-const { personSchema } = require("./persons");
+const { personSchema } = require("./people");
 const User = mongoose.model(
   "Users",
   new mongoose.Schema({

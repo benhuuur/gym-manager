@@ -51,7 +51,10 @@ const personSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 const Person = mongoose.model("Persons", personSchema);
+
 
 exports.Person = Person;
 exports.personSchema = personSchema;
+

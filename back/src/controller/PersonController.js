@@ -1,29 +1,30 @@
-const { Person } = require("../models/persons");
+const { Person, personSchema } = require("../models/people");
 const { Gym } = require("../models/gym");
 const UserController = require("../controller/UserController");
+const CryptoJS = require('crypto-js');
 
 class PersonController {
   static async create(req, res) {
-    try {
-      var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-      const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-      const json = JSON.parse(decryptd);
-      const { name, cpf, birth, gym_id } = json;
-      // const { name, cpf, birth, gym_id } = req.body;
+  try {
+    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    // const json = JSON.parse(decryptd);
+    // const { name, cpf, birth, gym_id } = json;
+    const { name, cpf, birth, gym_id } = req.body;
+    
+    if (!name)
+    return res.status(400).json({ message: "O nome é obrigatório" });
+  if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
+  if (!birth)
+  return res
+.status(400)
+.json({ message: "A data de nascimento é obrigatória" });
+if (!gym_id)
+return res
+.status(400)
+.json({ message: "A academia pertencente é obrigatória" });
 
-      if (!name)
-        return res.status(400).json({ message: "O nome é obrigatório" });
-      if (!cpf) return res.status(400).json({ message: "O cpf é obrigatório" });
-      if (!birth)
-        return res
-          .status(400)
-          .json({ message: "A data de nascimento é obrigatória" });
-      if (!gym_id)
-        return res
-          .status(400)
-          .json({ message: "A academia pertencente é obrigatória" });
-
-      const exist = await Person.findOne({
+const exist = await Person.findOne({
         cpf: cpf,
       });
       if (exist)
@@ -46,14 +47,12 @@ class PersonController {
         trainingTime: null,
         isFirst: false,
       });
-      if (await UserController.create(person, null)) {
-        Person.create(person);
-        return res
+
+        await UserController.create(person, null)
+          await Person.create(person);
+          return res
           .status(201)
           .send({ message: "Usuário cadastrado com sucesso" });
-      } else {
-        throw "Falha ao cadastrar usuario";
-      }
     } catch (error) {
       return res.status(500).send({ message: error });
     }
