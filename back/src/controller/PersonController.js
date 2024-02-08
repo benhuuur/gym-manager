@@ -137,6 +137,7 @@ const exist = await Person.findOne({
       return res.status(404).send({ error: error })
     }
   }
+
 }
 
 module.exports = PersonController;
