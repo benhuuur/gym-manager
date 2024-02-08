@@ -6,14 +6,14 @@ export const LoginContext = React.createContext();
 LoginContext.displayName = "LoginContextConcept";
 
 export const LoginProvider = ({children}) => {
-    const [cpf, setCpf] = useState('');
+    const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
     return (
         <>
             <LoginContext.Provider
                 value={{
-                    cpf, setCpf,
+                    login, setLogin,
                     password, setPassword
                 }}
             >

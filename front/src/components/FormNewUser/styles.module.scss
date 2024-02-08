@@ -23,6 +23,15 @@
         color: #ff0 !important;
         background-color: #666 !important; // Cor ao passar o mouse
       }
+
+      &__close {
+        background-color: rgb(255, 0, 0) !important; // Exemplo para botões
+        border-color: rgb(255, 0, 0) !important; // Exemplo para botões
+        color: #ffffff !important;
+        &:hover {
+          background-color: rgb(75, 2, 2) !important; // Cor ao passar o mouse
+        }
+      }
     }
   }
 }

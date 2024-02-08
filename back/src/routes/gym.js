@@ -3,6 +3,6 @@ const express = require("express");
 const route = express.Router();
 
 route.post("/create", GymController.create); // Route for the initial login (username)
-route.get("/getAll", GymController.getAllGym);
+route.get("/", GymController.getAll);
 
 module.exports = route;
