@@ -24,7 +24,7 @@ class PersonController {
           .status(400)
           .json({ message: "A academia pertencente é obrigatória" });
 
-      const exist = await Person.findOne({
+const exist = await Person.findOne({
         cpf: cpf,
       });
       if (exist)
