@@ -6,6 +6,6 @@ route.post("/create", PersonController.create);
 route.post("/update", PersonController.update); // Route for the first login (update data)
 route.post("/delete/:id", PersonController.delete);
 route.get("/", PersonController.getAll);
-
+route.get("/:id", PersonController.getById);
 
 module.exports = route;

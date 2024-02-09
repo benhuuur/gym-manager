@@ -6,11 +6,10 @@ const CryptoJS = require("crypto-js");
 class PersonController {
   static async create(req, res) {
     try {
-      // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-      // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-      // const json = JSON.parse(decryptd);
-      // const { name, cpf, birth, gym_id } = json;
-      const { name, cpf, birth, gym_id } = req.body;
+      var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+      const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+      const json = JSON.parse(decryptd);
+      const { name, cpf, birth, gym_id } = json;
 
       if (!name)
         return res.status(400).json({ message: "O nome é obrigatório" });
@@ -23,15 +22,15 @@ class PersonController {
         return res
           .status(400)
           .json({ message: "A academia pertencente é obrigatória" });
-
-const exist = await Person.findOne({
+      const exist = await Person.findOne({
         cpf: cpf,
       });
       if (exist)
         return res.status(422).json({ message: "cpf inválido, ja cadastrado" });
 
       const gym = await Gym.findById(gym_id);
-      if (gym) return res.status(422).json({ message: "Academia inválida" });
+
+      if (!gym) return res.status(422).json({ message: "Academia inválida" });
 
       const person = new Person({
         name,
@@ -48,11 +47,13 @@ const exist = await Person.findOne({
         isFirst: false,
       });
 
-      await UserController.create(person, null);
-      await Person.create(person);
-      return res
-        .status(201)
-        .send({ message: "Usuário cadastrado com sucesso" });
+      if (await UserController.create(person, null)) {
+        await Person.create(person);
+        return res
+          .status(201)
+          .send({ message: "Usuário cadastrado com sucesso" });
+      }
+      throw error;
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -61,8 +62,8 @@ const exist = await Person.findOne({
   static async delete(req, res) {
     try {
       const { id } = req.params;
-      UserController.delete(id);
-      Person.findByIdAndDelete(id);
+      if (await UserController.delete(id)) await Person.findByIdAndDelete(id);
+      return res.status(200).send({ message: "Usuário deletado com sucesso" });
     } catch (error) {
       return res.status(500).send({ message: error });
     }
@@ -121,6 +122,18 @@ const exist = await Person.findOne({
       if (persons.length < 1) return res.status(404);
       return res.status(200).send({
         persons,
+      });
+    } catch (error) {
+      return res.status(500).send({ message: error });
+    }
+  }
+  static async getById(req, res) {
+    const { id } = req.params;
+    try {
+      var person = await Person.findById(id);
+      if (!person) return res.status(404);
+      return res.status(200).send({
+        person,
       });
     } catch (error) {
       return res.status(500).send({ message: error });

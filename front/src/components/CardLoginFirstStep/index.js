@@ -47,7 +47,7 @@ export default function CardLoginFirstStep() {
       navigate("/complete-login");
     } catch (error) {
       console.log(error);
-      setMessage("Falha no Login, verifique os dados e tente novamente");
+      setMessage("Falha no Login, nenhum login encontrado");
       setShow(true);
       setVariant("danger");
     }

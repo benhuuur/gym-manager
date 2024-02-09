@@ -22,7 +22,7 @@ class GymController {
         equipments,
       });
 
-      if (await UserController.create(null, gym)) Gym.create(gym);
+      if (await UserController.create(null, gym)) await Gym.create(gym);
 
       return res
         .status(201)

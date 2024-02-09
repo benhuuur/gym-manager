@@ -1,36 +1,46 @@
 import styles from "./styles.module.scss";
 import Newuser from "../../components/FormNewUser";
 import { Button, Card, Col, Row } from "react-bootstrap";
+import PersonDetail from "../../components/PersonDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function AdmHome() {
   var [persons, setPersons] = useState([]);
-  function handleClick() {}
-  function Render() {
-    return persons.map((artigo, index) => {
+  async function handleDeleteClick(id) {
+    console.log(id);
+    const res = await axios.post(
+      "http://localhost:8080/api/person/delete/" + id
+    );
+    console.log(res);
+    window.location.reload();
+  }
+  const Render = () => {
+    return persons.map((person, index) => {
       return (
-        <Card key={index} className={styles.card}>
-          <Card.Title className={styles.card__title}>{artigo.title}</Card.Title>
-          <Card.Body className={styles.card__body}>
-            <Card.Text className={styles.card__body__article}>
-              {persons.Name}
-            </Card.Text>
-            <div className="d-flex align-items-center ">
-              {persons.Height}
+        <Card bg="dark" className={styles.card} style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title className={styles.card__title}>
+              {person.name}
+            </Card.Title>
+            <Card.Link>
+              <PersonDetail id={person._id}/>
+            </Card.Link>
+            <Card.Link>
               <Button
-                variant="light"
-                onClick={() => handleClick(persons._id)}
-              ></Button>
-            </div>
+                onClick={() => handleDeleteClick(person._id)}
+                className={styles.card__button__delete}
+              >
+                Deletar
+              </Button>
+            </Card.Link>
           </Card.Body>
         </Card>
       );
     });
-  }
+  };
   async function getPersons() {
     const res = await axios.get("http://localhost:8080/api/person/");
-    setPersons(res.data);
-    console.log(res);
+    setPersons(res.data.persons);
   }
   useEffect(() => {
     getPersons();
@@ -47,6 +57,9 @@ export default function AdmHome() {
               </div>
             </Col>
           </Row>
+          <div className={styles.cards}>
+            <Render />
+          </div>
         </Col>
       </div>
     </>

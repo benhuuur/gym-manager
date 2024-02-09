@@ -8,6 +8,7 @@ import axios from "axios";
 import { SECRET } from "../../env";
 import CryptoJS from "crypto-js";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function Newuser() {
   const [show, setShow] = useState(false);
@@ -49,28 +50,32 @@ function Newuser() {
     return true;
   }
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
+  const handleShow = () => setShow(true);
   async function handleSubmit(e) {
     e.preventDefault();
+    // if (!validCpf(cpf)) return;
+
     const json = {
       cpf,
       name,
       birth,
-      gym_id: sessionStorage.getItem("token")._id
+      gym_id: sessionStorage.getItem("token"),
     };
     const jsonCrypt = CryptoJS.AES.encrypt(
       JSON.stringify(json),
       SECRET
     ).toString();
     try {
-      var res = await axios.get("http://localhost:8080/api/author", {
+      var res = await axios.post("http://localhost:8080/api/person/create", {
         jsonCrypt,
       });
-      console.log(res);
+      if(res)
       setCpf("");
       setName("");
       setBirth(Date);
+      handleClose();
+      window.location.reload()
     } catch (error) {
       console.log(error);
     }
@@ -92,12 +97,7 @@ function Newuser() {
           <Modal.Title>Insira os dados do Aluno</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form
-            className={styles.card__form}
-            onSubmit={() => {
-              return;
-            }}
-          >
+          <Form className={styles.card__form} onSubmit={(e) => handleSubmit(e)}>
             <Form.Control
               className={styles.card__input}
               placeholder="Insira o cpf"
@@ -118,23 +118,19 @@ function Newuser() {
               value={birth}
               onChange={(e) => setBirth(e.target.value)}
             />
+            <Modal.Footer className={styles.dark__content__footer}>
+              <Button
+                className={styles.dark__content__button__close}
+                onClick={handleClose}
+              >
+                Cancelar
+              </Button>
+              <Button className={styles.dark__content__button} type="submit">
+                Adicionar
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer className={styles.dark__content__footer}>
-          <Button
-            className={styles.dark__content__button__close}
-            onClick={handleClose}
-          >
-            Cancelar
-          </Button>
-          <Button
-            className={styles.dark__content__button}
-            onClick={handleClose}
-            type="submit"
-          >
-            Adicionar
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

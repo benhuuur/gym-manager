@@ -50,9 +50,8 @@ class UserController {
     try {
       if (person) {
         login = person.cpf;
-        password = person.birth.getYear().toString();
-      }
-      if (gym) {
+        password = person.birth.getFullYear().toString();
+      } else if (gym) {
         login = gym.name;
         password = "1234";
       }
@@ -67,6 +66,7 @@ class UserController {
         removedAt: null,
       };
       await User.create(user);
+      console.log(user);
       return true;
     } catch (error) {
       return false;

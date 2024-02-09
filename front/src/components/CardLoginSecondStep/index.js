@@ -35,12 +35,12 @@ export default function CardLoginSecondStep() {
         json
       );
       console.log(res);
-      sessionStorage.setItem('token', res.data.logged.gym);
+      sessionStorage.setItem('token', res.data.logged.gym._id);
       if (res.data.logged.gym === null) navigate("/home-user");
       else navigate("/home-adm");
     } catch (error) {
       console.log(error);
-      setMessage("Falha no Login, verifique os dados e tente novamente");
+      setMessage("Falha no Login, verifique sua senha e tente novamente");
       setShow(true);
       setVariant("danger");
     }

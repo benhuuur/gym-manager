@@ -1,6 +1,8 @@
 .body {
   background-image: url("../../assets/Background/shine.png");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   //   background-color: #2b3035;
   height: 91vh;
 }
@@ -14,5 +16,71 @@
       justify-content: flex-end;
       width: 100vw !important;
     }
+  }
+}
+
+.card {
+  grid-column-end: span 3;
+  &__title {
+    color: aliceblue !important;
+    font-size: xx-large !important;
+    border-bottom-color: rgb(94, 0, 172) !important;
+    border-bottom-width: "20px" !important;
+    border-bottom-style: solid;
+  }
+  &__subtitle {
+    color: aliceblue !important;
+  }
+  &__button {
+    background-color: rgb(94, 0, 172) !important;
+    color: whitesmoke !important;
+    border-color: aliceblue !important;
+    &__delete {
+      background-color: whitesmoke !important;
+      color: rgb(94, 0, 172) !important;
+      border-color: aliceblue !important;
+    }
+  }
+}
+
+.cards {
+  grid-column: 2 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(auto, 60px));
+  grid-gap: 40px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .card {
+    grid-column-end: span 5;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  .card {
+    grid-column-end: span 6;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  // main {
+  //   grid-gap: 20px;
+  // }
+  .card {
+    grid-column-end: span 12;
+  }
+  .body {
+    height: fit-content;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  // main {
+  //   grid-template-columns: 10px repeat(6, 1fr) 10px;
+  //   grid-gap: 10px;
+  // }
+  .cards {
+    grid-column: 2 / span 6;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
   }
 }
