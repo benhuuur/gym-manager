@@ -20,5 +20,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/json2csv": "^5.0.7",
+    "@types/uuid": "^9.0.8"
   }
 }
