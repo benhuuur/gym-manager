@@ -8,17 +8,14 @@ import { SECRET } from "../../env";
 import CryptoJS from "crypto-js";
 import { jwtDecode } from "jwt-decode";
 
-// Contexts
 import { LoginContext } from "../../context/LoginContext";
 import { AlertContext } from "../../context/AlertContext";
 
 export default function CardLoginSecondStep() {
-  // Destructure values from contexts
   const { setMessage, setShow, setVariant } = useContext(AlertContext);
   const { login, password, setPassword } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
     const json = {
@@ -30,13 +27,14 @@ export default function CardLoginSecondStep() {
         JSON.stringify(json),
         SECRET
       ).toString();
-      const res = await axios.post(
-        "http://localhost:8080/api/user/password",
-        json
-      );
+      const res = await axios.post("http://localhost:8080/api/user/password", {
+        jsonCrypt: jsonCrypt,
+      });
       console.log(res);
-      sessionStorage.setItem('token', res.data.logged.gym._id);
-      if (res.data.logged.gym === null) navigate("/home-user");
+      const token = res.data.token;
+      sessionStorage.setItem("token", token);
+      const decode = jwtDecode(token);
+      if (decode.isPerson) navigate("/home-user");
       else navigate("/home-adm");
     } catch (error) {
       console.log(error);
@@ -44,12 +42,6 @@ export default function CardLoginSecondStep() {
       setShow(true);
       setVariant("danger");
     }
-  }
-
-  // Placeholder for login validation logic
-  function isLoginValid() {
-    // Implement your login validation logic here
-    // Return true if login is valid, false otherwise
   }
 
   return (

@@ -7,8 +7,6 @@ import axios from "axios";
 
 import { SECRET } from "../../env";
 import CryptoJS from "crypto-js";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 
 function Newuser() {
   const [show, setShow] = useState(false);
@@ -54,13 +52,12 @@ function Newuser() {
   const handleShow = () => setShow(true);
   async function handleSubmit(e) {
     e.preventDefault();
-    // if (!validCpf(cpf)) return;
 
     const json = {
       cpf,
       name,
       birth,
-      gym_id: sessionStorage.getItem("token"),
+      token: sessionStorage.getItem("token"),
     };
     const jsonCrypt = CryptoJS.AES.encrypt(
       JSON.stringify(json),

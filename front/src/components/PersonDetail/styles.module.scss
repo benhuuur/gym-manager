@@ -1,65 +1,119 @@
 .dark {
-    &__content {
-      background-color: #333 !important; // Dark theme background color
-      color: white !important; // Dark theme text color
-      // Outras personalizações podem ser adicionadas aqui
-  
-      &__header,
-      &__footer {
-        border-color: #444 !important; // Ajustar a cor da borda para combinar com o tema escuro
+  &__content {
+    background-color: #333 !important; // Dark theme background color
+    color: white !important; // Dark theme text color
+    // Outras personalizações podem ser adicionadas aqui
+
+    &__header,
+    &__footer {
+      border-color: #444 !important; // Ajustar a cor da borda para combinar com o tema escuro
+    }
+
+    &__title {
+      color: white !important; // Ajustar a cor do título para o tema escuro
+    }
+
+    // Se você tiver botões ou outros elementos, você pode também estilizá-los aqui
+    &__button {
+      background-color: #ff0 !important; // Exemplo para botões
+      border-color: #ff0 !important; // Exemplo para botões
+      color: #555 !important;
+
+      &:hover {
+        color: #ff0 !important;
+        background-color: #666 !important; // Cor ao passar o mouse
       }
-  
-      &__title {
-        color: white !important; // Ajustar a cor do título para o tema escuro
-      }
-  
-      // Se você tiver botões ou outros elementos, você pode também estilizá-los aqui
-      &__button {
-        background-color: #ff0 !important; // Exemplo para botões
-        border-color: #ff0 !important; // Exemplo para botões
-        color: #555 !important;
-  
+
+      &__close {
+        background-color: rgb(255, 0, 0) !important; // Exemplo para botões
+        border-color: rgb(255, 0, 0) !important; // Exemplo para botões
+        color: #ffffff !important;
         &:hover {
-          color: #ff0 !important;
-          background-color: #666 !important; // Cor ao passar o mouse
-        }
-  
-        &__close {
-          background-color: rgb(255, 0, 0) !important; // Exemplo para botões
-          border-color: rgb(255, 0, 0) !important; // Exemplo para botões
-          color: #ffffff !important;
-          &:hover {
-            background-color: rgb(75, 2, 2) !important; // Cor ao passar o mouse
-          }
+          background-color: rgb(75, 2, 2) !important; // Cor ao passar o mouse
         }
       }
     }
   }
-  
+}
+
+.card {
+  position: fixed;
+  top: 25vh;
+  &__header {
+    display: flex;
+    border: none !important;
+    align-items: center;
+    justify-content: center;
+  }
+  &__form {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+
+    &__button {
+      width: 100%;
+    }
+  }
+  &__section {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: #818181;
+  }
+  &__input {
+    background-color: #555 !important;
+    color: aliceblue !important;
+    &__half {
+      background-color: #555 !important;
+      color: aliceblue !important;
+      width: 6vw !important;
+    }
+  }
+  &__groups {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.button {
+  background-color: rgb(94, 0, 172) !important;
+  color: whitesmoke !important;
+  border-color: aliceblue !important;
+}
+
+.collumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 700px) {
+  // main {
+  //   grid-gap: 20px;
+  // }
   .card {
-    position: fixed;
-    top: 25vh;
-    &__header {
-      display: flex;
-      border: none !important;
-      align-items: center;
-      justify-content: center;
-    }
-    &__form {
-      display: flex;
-      gap: 2rem;
-      flex-direction: column;
-  
-      &__button {
-        width: 100%;
+    &__input {
+      &__half {
+        width: 11vw !important;
       }
     }
   }
-
- .button {
-    background-color: rgb(94, 0, 172) !important;
-    color: whitesmoke !important;
-    border-color: aliceblue !important;
-
+  // .body {
+  //   height: fit-content;
+  // }
+}
+@media only screen and (max-width: 400px) {
+  // main {
+  //   grid-gap: 20px;
+  // }
+  .card {
+    &__input {
+      &__half {
+        width: 18vw !important;
+      }
+    }
   }
-  
+  // .body {
+  //   height: fit-content;
+  // }
+}

@@ -2,6 +2,7 @@ const { Person, personSchema } = require("../models/people");
 const { Gym } = require("../models/gym");
 const UserController = require("../controller/UserController");
 const CryptoJS = require("crypto-js");
+const jwtOperations = require("./jwtOperations");
 
 class PersonController {
   static async create(req, res) {
@@ -9,7 +10,7 @@ class PersonController {
       var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
       const decryptd = bytes.toString(CryptoJS.enc.Utf8);
       const json = JSON.parse(decryptd);
-      const { name, cpf, birth, gym_id } = json;
+      const { name, cpf, birth, token } = json;
 
       if (!name)
         return res.status(400).json({ message: "O nome é obrigatório" });
@@ -18,16 +19,26 @@ class PersonController {
         return res
           .status(400)
           .json({ message: "A data de nascimento é obrigatória" });
-      if (!gym_id)
+      if (!token)
         return res
           .status(400)
-          .json({ message: "A academia pertencente é obrigatória" });
+          .json({ message: "Envie a credencial de acesso" });
+
+      const decode = jwtOperations.decodeJWT(token);
+      const isValid = jwtOperations.verifyJWT(token);
+      if (!isValid && !decode.isPerson)
+        return res
+          .status(400)
+          .json({ message: "Envie uma credencial de acesso válida" });
+
       const exist = await Person.findOne({
         cpf: cpf,
       });
+
       if (exist)
         return res.status(422).json({ message: "cpf inválido, ja cadastrado" });
 
+      const gym_id = decode.id;
       const gym = await Gym.findById(gym_id);
 
       if (!gym) return res.status(422).json({ message: "Academia inválida" });
@@ -62,6 +73,15 @@ class PersonController {
   static async delete(req, res) {
     try {
       const { id } = req.params;
+      const { token } = req.body;
+      const decode = jwtOperations.decodeJWT(token);
+      const isValid = jwtOperations.verifyJWT(token);
+      console.log(token);
+      if (!isValid && !decode.isPerson)
+        return res
+          .status(400)
+          .json({ message: "Envie uma credencial de acesso válida" });
+
       if (await UserController.delete(id)) await Person.findByIdAndDelete(id);
       return res.status(200).send({ message: "Usuário deletado com sucesso" });
     } catch (error) {
@@ -134,6 +154,20 @@ class PersonController {
       if (!person) return res.status(404);
       return res.status(200).send({
         person,
+      });
+    } catch (error) {
+      return res.status(500).send({ message: error });
+    }
+  }
+  static async getByGymId(req, res) {
+    const { id } = req.params;
+    try {
+      var persons = await Person.find({ "gym._id": id }).select(
+        "-cpf -isFirst"
+      );
+      if (!persons) return res.status(404);
+      return res.status(200).send({
+        persons,
       });
     } catch (error) {
       return res.status(500).send({ message: error });

@@ -1,9 +1,9 @@
 ✓ Deve ser em React, Node e MongoDB
-* Deve ter pelo menos 5 páginas 
-* Deve ter login
-* Somente adm pode deletar
+✓ Deve ter pelo menos 5 páginas 
+✓ Deve ter login
+✓ Somente adm pode deletar
 * Site deve ser traduzido 
-* Cada integrante deve fazer uma 
+✓ Cada integrante deve fazer uma 
 parte do front-end e do back-end
 * Deve ter paginação
 * Ao trabalhar com senhas, a requisição deve

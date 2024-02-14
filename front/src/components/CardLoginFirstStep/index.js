@@ -21,15 +21,6 @@ export default function CardLoginFirstStep() {
   const { login, setLogin } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  // function formatInput(value) {
-  //   var newValue = value
-  //     .replace(/\D/g, "") // substitui qualquer caracter que nao seja numero por nada
-  //     .replace(/(\d{3})(\d)/, "$1.$2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-  //     .replace(/(\d{3})(\d)/, "$1.$2")
-  //     .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-  //     .replace(/(-\d{2})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
-  //   setCpf(newValue);
-  // }
   async function handleSubimit(e) {
     e.preventDefault();
     if (!isLoginValid()) return;
@@ -41,7 +32,8 @@ export default function CardLoginFirstStep() {
         JSON.stringify(json),
         SECRET
       ).toString();
-      var res = await axios.post("http://localhost:8080/api/user/login", json);
+      console.log(jsonCrypt);
+      var res = await axios.post("http://localhost:8080/api/user/login", {jsonCrypt: jsonCrypt});
       console.log(res);
       sessionStorage.setItem("token", res.data.token); // Correção para acessar o token corretamente
       navigate("/complete-login");

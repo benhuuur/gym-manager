@@ -4,7 +4,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   //   background-color: #2b3035;
-  height: 91vh;
+  height: 92vh;
 }
 
 .container {
@@ -68,9 +68,9 @@
   .card {
     grid-column-end: span 12;
   }
-  .body {
-    height: fit-content;
-  }
+  // .body {
+  //   height: fit-content;
+  // }
 }
 
 @media only screen and (max-width: 500px) {

@@ -4,12 +4,14 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import PersonDetail from "../../components/PersonDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 export default function AdmHome() {
   var [persons, setPersons] = useState([]);
   async function handleDeleteClick(id) {
     console.log(id);
     const res = await axios.post(
-      "http://localhost:8080/api/person/delete/" + id
+      "http://localhost:8080/api/person/delete/" + id,
+      { token: sessionStorage.getItem("token") }
     );
     console.log(res);
     window.location.reload();
@@ -23,7 +25,7 @@ export default function AdmHome() {
               {person.name}
             </Card.Title>
             <Card.Link>
-              <PersonDetail id={person._id}/>
+              <PersonDetail id={person._id} />
             </Card.Link>
             <Card.Link>
               <Button
@@ -39,7 +41,9 @@ export default function AdmHome() {
     });
   };
   async function getPersons() {
-    const res = await axios.get("http://localhost:8080/api/person/");
+    const token = sessionStorage.getItem("token");
+    const id = jwtDecode(token).id;
+    const res = await axios.get("http://localhost:8080/api/person/gym/" + id);
     setPersons(res.data.persons);
   }
   useEffect(() => {
