@@ -1,17 +1,3 @@
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service as ChromeService
-# from webdriver_manager.chrome import ChromeDriverManager
-# from selenium.webdriver.chrome.options import Options
-
-# # define custom options for the Selenium driver
-# options = Options()
-# options.l = "C:\Program Files\Anaconda3\chromedriver.exe"
-
-# # create the ChromeDriver instance with custom options
-# driver = webdriver.Chrome(
-#     options=options
-# )
-
 import os
 import csv 
 import time
@@ -22,10 +8,6 @@ openai.proxy = {
     "http": "http://disrct:etsds10240305@rb-proxy-ca1.bosch.com:8080", 
     "https": "http://rb-proxy-ca1.bosch.com:8080"
 }
-
-# OS_PATH = os.path.dirname(os.path.realpath('__file__'))
-# TW = OS_PATH + ""
-# oto = OS_PATH + ""
 
 def get_type_workout_gpt3dot5(training_type, GPTModel):
     messages = [

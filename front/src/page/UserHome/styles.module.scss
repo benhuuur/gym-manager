@@ -1,8 +1,23 @@
 .body {
-  background-image: url('../../assets/Background/shine.png');
+  background-image: url('../../assets/Background/gym.png');
   background-size: cover;
 //   background-color: #2b3035;
-  height: 91vh;
+  background-attachment: fixed;
+  height: 90.6vh;
+  // -webkit-filter: blur(15px);
+  // -moz-filter: blur(15px);
+  // -o-filter: blur(15px);
+  // -ms-filter: blur(15px);
+  // filter: blur(15px);
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+  
 }
 
 .dropdown {

@@ -1,11 +1,25 @@
 import styles from "./styles.module.scss";
+import { Button } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import ClientForm from "../../components/Forms";
 import { useState } from "react";
+
+//context
+import { LoginContext } from "../../context/LoginContext";
+import { useContext } from "react";
+
+//components
+import ClientForm from "../../components/Forms";
+import ExercisesCarousel from "../../components/CarousselExercises";
+import TrainingModal from "../../components/TrainingSheetModal";
+import Footer from "../../components/Footer";
+import ChartModal from "../../components/ChartModal";
+
 
 export default function UserHome() {
   const [page, setPage] = useState(true);
+  const { login, password, setPassword } = useContext(LoginContext);
+
   function Render() {
     if (page) {
       return <>Dados</>;
@@ -22,7 +36,7 @@ export default function UserHome() {
             id="dropdown-button-dark-example1"
             variant="secondary"
           >
-            Sei la
+            Anabelly Sthephany Paiva Montibeller{login}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -35,7 +49,18 @@ export default function UserHome() {
           </Dropdown.Menu>
         </Dropdown>
         {Render()}
+        <div className={styles.content}>
+        <ChartModal></ChartModal>
+        <br></br>
+        <br></br>
+        <TrainingModal></TrainingModal>
+        <br></br>
+        <br></br>
+        <ExercisesCarousel></ExercisesCarousel>
+        </div>
+
       </div>
+      <Footer></Footer>
     </>
   );
 }
