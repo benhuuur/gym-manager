@@ -15,15 +15,19 @@ import ViewUserSheet from "./page/UserTrainingView";
 
 //Components
 import NavbarComponent from "./components/NavBar";
+import {RemoveScroll} from 'react-remove-scroll';
 
 //Provider
 import { LoginProvider } from "./context/LoginContext";
 import { AlertProvider } from "./context/AlertContext";
 import { SheetProvider } from "./context/SheetContext";
+import { TrainingProvider } from "./context/TrainingContext";
 
 function App() {
   return (
     <>
+    {/* <RemoveScroll> */}
+      <TrainingProvider>
       <AlertProvider>
         <LoginProvider>
           <SheetProvider>
@@ -39,6 +43,8 @@ function App() {
           </SheetProvider>
         </LoginProvider>
       </AlertProvider>
+      </TrainingProvider>
+      {/* </RemoveScroll> */}
     </>
   );
 }
