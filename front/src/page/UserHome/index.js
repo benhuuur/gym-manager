@@ -14,6 +14,7 @@ import ExercisesCarousel from "../../components/CarousselExercises";
 import TrainingModal from "../../components/TrainingSheetModal";
 import Footer from "../../components/Footer";
 import ChartModal from "../../components/ChartModal";
+import CheckListModal from "../../components/CheckListModal";
 
 
 export default function UserHome() {
@@ -54,6 +55,9 @@ export default function UserHome() {
         <br></br>
         <br></br>
         <TrainingModal></TrainingModal>
+        <br></br>
+        <br></br>
+        <CheckListModal></CheckListModal>
         <br></br>
         <br></br>
         <ExercisesCarousel></ExercisesCarousel>

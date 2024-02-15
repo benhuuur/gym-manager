@@ -12,6 +12,7 @@ import Login from "./page/Login";
 import LoginFirstStep from "./page/LoginFirstStep";
 import Register from "./page/Register";
 import ViewUserSheet from "./page/UserTrainingView";
+import Workouts from "./page/Plans";
 
 //Components
 import NavbarComponent from "./components/NavBar";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/complete-login" element={<LoginFirstStep />} />
             <Route path="/home-adm" element={<AdmHome />} />
             <Route path="/home-user" element={<UserHome />} />
+            <Route path="/plans" element={<Workouts />} />
             <Route path="/view-user-sheet" element={<ViewUserSheet />} />
             <Route path="/register" element={<Register />} />
           </Routes>

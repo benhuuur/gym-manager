@@ -6,6 +6,7 @@ import instructor from "../../assets/ModalStyle/home.jpg"
 import ex from "../../assets/ModalStyle/eita.png"
 import styles from "./styles.module.scss";
 
+
 function ExercisesCarousel() {
   const [index, setIndex] = useState(0);
 

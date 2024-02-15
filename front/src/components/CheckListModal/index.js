@@ -4,9 +4,9 @@ import styles from "./styles.module.scss";
 import { Form, Button } from "react-bootstrap";
 
 //components
-import TrainingSheet from "../TrainingSheet";
 
-export default function TrainingModal() {
+
+export default function CheckListModal() {
   const [show, setShow] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +35,7 @@ export default function TrainingModal() {
       className={styles.dark__content__button}
       onClick={handleOpen}
       >
-      Ficha de Treino
+      CheckList de Objetivos
       </Button>
       <Modal
         show={show}
@@ -44,11 +44,11 @@ export default function TrainingModal() {
         contentClassName={styles.dark__content}
       >
         <Modal.Header className={styles.dark__content__header}>
-          <Modal.Title>Sua Ficha de Treino</Modal.Title>
+          <Modal.Title>Meus Objetivos</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form className={styles.card__form} onSubmit={handleSubmit}>
-            <TrainingSheet></TrainingSheet>
+           
           </Form>
         </Modal.Body>
         <Modal.Footer className={styles.dark__content__footer}>
@@ -56,7 +56,7 @@ export default function TrainingModal() {
             className={styles.dark__content__button}
             onClick={handleClose}
           >
-            Fechar Ficha de Treino
+            Fechar CheckList de Objetivos
           </Button>
         </Modal.Footer>
       </Modal>
