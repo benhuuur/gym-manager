@@ -35,7 +35,7 @@ export default function ChartModal() {
       className={styles.dark__content__button}
       onClick={handleOpen}
       >
-      Abrir Gráfico de Desempenho
+      Gráfico de Desempenho
       </Button>
       <Modal
         show={show}

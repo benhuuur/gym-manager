@@ -1,0 +1,53 @@
+.dark {
+    &__content {
+      background-color: #333 !important; // Dark theme background color
+      color: white !important; // Dark theme text color
+      // Outras personalizações podem ser adicionadas aqui
+  
+      &__header,
+      &__footer {
+        border-color: #444 !important; // Ajustar a cor da borda para combinar com o tema escuro
+      }
+  
+      &__title {
+        color: white !important; // Ajustar a cor do título para o tema escuro
+      }
+  
+      // Se você tiver botões ou outros elementos, você pode também estilizá-los aqui
+      &__button {
+        background-color: #000000  !important; // Exemplo para botões
+        border-color: #000000 !important; // Exemplo para botões
+        font-size: larger;
+        font-weight: bolder;
+        color: rgb(251, 246, 255);
+        width: 450px;
+        height: 50px;
+  
+        &:hover {
+          color: #000000 !important;
+          background-color: rgb(251, 246, 255) !important; // Cor ao passar o mouse
+        }
+      }
+    }
+  }
+  
+  .card {
+    position: fixed;
+    top: 25vh;
+    &__header {
+      display: flex;
+      border: none !important;
+      align-items: center;
+      justify-content: center;
+    }
+    &__form {
+      display: flex;
+      gap: 2rem;
+      flex-direction: column;
+  
+      &__button {
+        width: 100%;
+      }
+    }
+  }
+  
