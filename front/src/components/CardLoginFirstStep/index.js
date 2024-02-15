@@ -21,6 +21,26 @@ export default function CardLoginFirstStep() {
   const { login, setLogin } = useContext(LoginContext);
   const navigate = useNavigate();
 
+  function formatInput(value) {
+    value = value.slice(0, 14);
+    value = value.replace(/\.|\-/g, "")
+    if (/^\d+$/.test(value)) {
+      // Formata como CPF
+      var newValue = value
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})/, "$1-$2");
+
+      // Atualiza o estado
+      setLogin(newValue);
+    } else {
+      console.log(value)
+      console.log(/^\d+$/.test(value))
+      // Se o valor contiver letras, mantenha-o inalterado
+      setLogin(value);
+    }
+  }
+
   async function handleSubimit(e) {
     e.preventDefault();
     if (!isLoginValid()) return;
@@ -33,7 +53,9 @@ export default function CardLoginFirstStep() {
         SECRET
       ).toString();
       console.log(jsonCrypt);
-      var res = await axios.post("http://localhost:8080/api/user/login", {jsonCrypt: jsonCrypt});
+      var res = await axios.post("http://localhost:8080/api/user/login", {
+        jsonCrypt: jsonCrypt,
+      });
       console.log(res);
       sessionStorage.setItem("token", res.data.token); // Correção para acessar o token corretamente
       navigate("/complete-login");
@@ -100,7 +122,7 @@ export default function CardLoginFirstStep() {
               className={styles.card__input}
               value={login}
               placeholder="Insira seu Login"
-              onChange={(e) => setLogin(e.target.value)}
+              onChange={(e) => formatInput(e.target.value)}
             />
             <Button
               className={styles.card__form__button}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import styles from "./styles.module.scss";
@@ -7,12 +7,15 @@ import axios from "axios";
 
 import { SECRET } from "../../env";
 import CryptoJS from "crypto-js";
+import { AlertContext } from "../../context/AlertContext";
 
 function Newuser() {
-  const [show, setShow] = useState(false);
+  const [show, setShowCard] = useState(false);
   const [cpf, setCpf] = useState("");
   const [name, setName] = useState("");
   const [birth, setBirth] = useState(Date);
+  const { setMessage, setShow, setVariant } = useContext(AlertContext);
+
   function formatInput(value) {
     var newValue = value
       .replace(/\D/g, "") // substitui qualquer caracter que nao seja numero por nada
@@ -47,9 +50,9 @@ function Newuser() {
     if (11 - (somaDig2 % 11) != cpfSplit[10]) return false;
     return true;
   }
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShowCard(false);
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShowCard(true);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -67,14 +70,20 @@ function Newuser() {
       var res = await axios.post("http://localhost:8080/api/person/create", {
         jsonCrypt,
       });
-      if(res)
-      setCpf("");
+      if (res) setCpf("");
       setName("");
       setBirth(Date);
       handleClose();
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.log(error);
+      setMessage(error.response.data.message);
+      setShow(true);
+      setVariant("danger");
+      setShowCard(false);
+      setCpf("");
+      setName("");
+      setBirth(Date);
     }
   }
   return (

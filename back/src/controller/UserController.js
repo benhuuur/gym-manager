@@ -10,11 +10,8 @@ class UserController {
       const decryptd = bytes.toString(CryptoJS.enc.Utf8);
       const json = JSON.parse(decryptd);
       const { login } = json;
-      // const { login } = req.body;
-
       if (!login)
         return res.status(422).json({ message: "O login é obrigatório" });
-
       const logged = await User.findOne({ login: login });
       if (!logged) return res.status(422).json({ message: "Usuário inválido" });
       return res.status(200).send({ message: "usuário encontrado" });
@@ -33,11 +30,15 @@ class UserController {
       if (!password)
         return res.status(422).json({ message: "A senha é obrigatória" });
 
-      const logged = await User.findOne({ login: login, password: password });
+      const logged = await User.findOne({ login: login });
+      const passwordCrypt = CryptoJS.AES.decrypt(logged.password, process.env.SECRET);
+      const passwordDecryptd = passwordCrypt.toString(CryptoJS.enc.Utf8);
+
       if (!logged)
         return res
           .status(422)
           .json({ message: "Usuário e/ou senha inválidos" });
+
       const isPerson = logged.gym == null ? true : false;
       const id = isPerson ? logged.person._id : logged.gym._id;
 
@@ -77,7 +78,13 @@ class UserController {
         password,
         process.env.SECRET
       ).toString();
-      
+      const passwordDecrypt = CryptoJS.AES.decrypt(
+        passwordCrypt,
+        process.env.SECRET
+      ).toString();
+
+      console.log(passwordCrypt)
+      console.log(passwordDecrypt)
 
       const user = {
         login,
@@ -94,7 +101,7 @@ class UserController {
 
   static async delete(id) {
     try {
-      User.deleteOne({ "person._id": id });
+      await User.deleteOne({ "person._id": id });
       return true;
     } catch (error) {
       return false;

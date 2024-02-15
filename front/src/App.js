@@ -16,7 +16,7 @@ import Workouts from "./page/Plans";
 
 //Components
 import NavbarComponent from "./components/NavBar";
-import {RemoveScroll} from 'react-remove-scroll';
+// import {RemoveScroll} from 'react-remove-scroll';
 
 //Provider
 import { LoginProvider } from "./context/LoginContext";
@@ -40,7 +40,7 @@ function App() {
             <Route path="/home-user" element={<UserHome />} />
             <Route path="/plans" element={<Workouts />} />
             <Route path="/view-user-sheet" element={<ViewUserSheet />} />
-            <Route path="/register" element={<Register />} />
+            {/* <Route path="/register" element={<Register />} /> */}
           </Routes>
           </SheetProvider>
         </LoginProvider>
