@@ -5,6 +5,8 @@ import PersonDetail from "../../components/PersonDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import AdmForm from "../../components/SetTraining";
+
 export default function AdmHome() {
   var [persons, setPersons] = useState([]);
   async function handleDeleteClick(id) {
@@ -28,6 +30,7 @@ export default function AdmHome() {
               <PersonDetail id={person._id} />
             </Card.Link>
             <Card.Link>
+              <AdmForm></AdmForm>
               <Button
                 onClick={() => handleDeleteClick(person._id)}
                 className={styles.card__button__delete}

@@ -12,6 +12,8 @@ export const TrainingProvider = ({children}) => {
     const [ex4, setEx4] = useState('');
     const [ex5, setEx5] = useState('');
     const [ex6, setEx6] = useState('');
+    const [ex7, setEx7] = useState('');
+
 
     const [exercises, setExercises] = useState([])
     return(
@@ -24,6 +26,7 @@ export const TrainingProvider = ({children}) => {
                     ex4, setEx4,
                     ex5, setEx5,
                     ex6, setEx6,
+                    ex7, setEx7,
                     exercises, setExercises
                 }}    
             >
