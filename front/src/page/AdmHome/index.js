@@ -2,19 +2,29 @@ import styles from "./styles.module.scss";
 import Newuser from "../../components/FormNewUser";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import PersonDetail from "../../components/PersonDetail";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import AlertComponent from "../../components/Alert";
+import { AlertContext } from "../../context/AlertContext";
 export default function AdmHome() {
+  const { setMessage, setShow, setVariant } = useContext(AlertContext);
   var [persons, setPersons] = useState([]);
   async function handleDeleteClick(id) {
-    console.log(id);
-    const res = await axios.post(
-      "http://localhost:8080/api/person/delete/" + id,
-      { token: sessionStorage.getItem("token") }
-    );
-    console.log(res);
-    window.location.reload();
+    try {
+      console.log(id);
+      const res = await axios.post(
+        "http://localhost:8080/api/person/delete/" + id,
+        { token: sessionStorage.getItem("token") }
+      );
+      console.log(res);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      setMessage(error.response.data.message);
+      setShow(true);
+      setVariant("danger");
+    }
   }
   const Render = () => {
     return persons.map((person, index) => {
@@ -61,6 +71,7 @@ export default function AdmHome() {
               </div>
             </Col>
           </Row>
+          <AlertComponent />
           <div className={styles.cards}>
             <Render />
           </div>

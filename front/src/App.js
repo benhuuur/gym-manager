@@ -15,7 +15,7 @@ import ViewUserSheet from "./page/UserTrainingView";
 
 //Components
 import NavbarComponent from "./components/NavBar";
-import {RemoveScroll} from 'react-remove-scroll';
+// import {RemoveScroll} from 'react-remove-scroll';
 
 //Provider
 import { LoginProvider } from "./context/LoginContext";
