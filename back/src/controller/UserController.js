@@ -30,11 +30,16 @@ class UserController {
       if (!password)
         return res.status(422).json({ message: "A senha é obrigatória" });
 
-      const logged = await User.findOne({ login: login });
+      var logged = await User.findOne({ login: login });
       const passwordCrypt = CryptoJS.AES.decrypt(logged.password, process.env.SECRET);
       const passwordDecryptd = passwordCrypt.toString(CryptoJS.enc.Utf8);
 
-      if (!logged)
+      
+
+      logged = await User.findOne({ login: login });
+
+
+      if (!logged && passwordDecryptd == password)
         return res
           .status(422)
           .json({ message: "Usuário e/ou senha inválidos" });
@@ -78,13 +83,6 @@ class UserController {
         password,
         process.env.SECRET
       ).toString();
-      const passwordDecrypt = CryptoJS.AES.decrypt(
-        passwordCrypt,
-        process.env.SECRET
-      ).toString();
-
-      console.log(passwordCrypt)
-      console.log(passwordDecrypt)
 
       const user = {
         login,
