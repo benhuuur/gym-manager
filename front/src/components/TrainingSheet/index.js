@@ -24,12 +24,13 @@ export default function TrainingSheet() {
       <Table sx={{ minWidth: 350 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">teste1</TableCell>
-            <TableCell align="center">teste2&nbsp;</TableCell>
-            <TableCell align="center">teste3&nbsp;</TableCell>
-            <TableCell align="center">teste4&nbsp;</TableCell>
-            <TableCell align="center">teste5&nbsp;</TableCell>
-            <TableCell align="center">teste6&nbsp;</TableCell>
+            <TableCell align="center">Segunda</TableCell>
+            <TableCell align="center">Terça&nbsp;</TableCell>
+            <TableCell align="center">Quarta&nbsp;</TableCell>
+            <TableCell align="center">Quinta&nbsp;</TableCell>
+            <TableCell align="center">Sexta&nbsp;</TableCell>
+            <TableCell align="center">Sábado&nbsp;</TableCell>
+            <TableCell align="center">Domingo&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,6 +43,10 @@ export default function TrainingSheet() {
                 <TableCell align="center">{ex.ex1}</TableCell>
                 <TableCell align="center">{ex.ex2}</TableCell>
                 <TableCell align="center">{ex.ex3}</TableCell>
+                <TableCell align="center">{ex.ex4}</TableCell>
+                <TableCell align="center">{ex.ex5}</TableCell>
+                <TableCell align="center">{ex.ex6}</TableCell>
+                <TableCell align="center">{ex.ex7}</TableCell>
               </TableRow>
             );
           })}

@@ -5,6 +5,7 @@ import kkk from "../../assets/Background/background.jpg"
 import instructor from "../../assets/ModalStyle/home.jpg"
 import ex from "../../assets/ModalStyle/eita.png"
 import styles from "./styles.module.scss";
+import { NavLink } from "react-router-dom";
 
 
 function ExercisesCarousel() {
@@ -18,11 +19,13 @@ function ExercisesCarousel() {
     <div className={styles.body}>
     <Carousel activeIndex={index} onSelect={handleSelect} className={styles.c}>
       <Carousel.Item>
+        <NavLink to="/">
         <img text="Teste1" 
           className={styles.img}
           width={530}
           height={270}
           src={instructor}/>
+          </NavLink>
         <Carousel.Caption>
           <h3>Instrutores</h3>
           <p>Descubra informações sobre nossos instrutores!.</p>
@@ -40,11 +43,13 @@ function ExercisesCarousel() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
+      <NavLink to="/plans">
         <img text="Teste3" 
           className={styles.img}
           width={530}
           height={270}
           src={kkk}/>
+        </NavLink>
         <Carousel.Caption>
           <h3>Nossos Planos</h3>
           <p>

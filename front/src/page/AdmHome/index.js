@@ -7,6 +7,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import AlertComponent from "../../components/Alert";
 import { AlertContext } from "../../context/AlertContext";
+import AdmForm from "../../components/SetTraining";
 export default function AdmHome() {
   const { setMessage, setShow, setVariant } = useContext(AlertContext);
   var [persons, setPersons] = useState([]);
@@ -38,6 +39,7 @@ export default function AdmHome() {
               <PersonDetail id={person._id} />
             </Card.Link>
             <Card.Link>
+              <AdmForm></AdmForm>
               <Button
                 onClick={() => handleDeleteClick(person._id)}
                 className={styles.card__button__delete}

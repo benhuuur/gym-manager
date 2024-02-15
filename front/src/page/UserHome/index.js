@@ -19,7 +19,7 @@ import CheckListModal from "../../components/CheckListModal";
 
 export default function UserHome() {
   const [page, setPage] = useState(true);
-  const { login, password, setPassword } = useContext(LoginContext);
+  const { login } = useContext(LoginContext);
 
   function Render() {
     if (page) {
@@ -37,7 +37,7 @@ export default function UserHome() {
             id="dropdown-button-dark-example1"
             variant="secondary"
           >
-            Anabelly Sthephany Paiva Montibeller{login}
+            {login}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -49,7 +49,7 @@ export default function UserHome() {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        {Render()}
+        {/* {Render()} */}
         <div className={styles.content}>
         <ChartModal></ChartModal>
         <br></br>
