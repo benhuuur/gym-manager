@@ -11,6 +11,7 @@ import UserHome from "./page/UserHome";
 import Login from "./page/Login";
 import LoginFirstStep from "./page/LoginFirstStep";
 import Register from "./page/Register";
+import Error from "./page/Error404";
 import ViewUserSheet from "./page/UserTrainingView";
 import Workouts from "./page/Plans";
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/home-user" element={<UserHome />} />
             <Route path="/plans" element={<Workouts />} />
             <Route path="/view-user-sheet" element={<ViewUserSheet />} />
+            <Route path="*" element={<Error />} />
             {/* <Route path="/register" element={<Register />} /> */}
           </Routes>
           </SheetProvider>

@@ -49,27 +49,27 @@ export default function AdmForm() {
             <Form.Control
               className={styles.card__input}
               placeholder="Treino 1"
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => setEx3(e.target.value)}
             />
             <Form.Control
               className={styles.card__input}
-              placeholder="Quinta"
-              onChange={(e) => console.log(e.target.value)}
+              placeholder="Treino 2"
+              onChange={(e) => setEx4(e.target.value)}
             />
             <Form.Control
               className={styles.card__input}
-              placeholder="Sexta"
-              onChange={(e) => console.log(e.target.value)}
+              placeholder="Treino 2"
+              onChange={(e) => setEx5(e.target.value)}
             />
             <Form.Control
               className={styles.card__input}
-              placeholder="Sábado"
-              onChange={(e) => console.log(e.target.value)}
+              placeholder="Treino 2"
+              onChange={(e) => setEx6(e.target.value)}
             />
             <Form.Control
               className={styles.card__input}
-              placeholder="Domingo"
-              onChange={(e) => console.log(e.target.value)}
+              placeholder="Treino 2"
+              onChange={(e) => setEx7(e.target.value)}
             />
           </Form>
         </Modal.Body>

@@ -62,6 +62,7 @@ export default function CardLoginSecondStep() {
             <Form.Control
               className={styles.card__input}
               value={password}
+              type="password"
               placeholder="Insira sua Senha"
               onChange={(e) => setPassword(e.target.value)}
             />
