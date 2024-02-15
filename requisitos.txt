@@ -6,7 +6,7 @@
 ✓ Cada integrante deve fazer uma 
 parte do front-end e do back-end
 * Deve ter paginação
-* Ao trabalhar com senhas, a requisição deve
+✓ Ao trabalhar com senhas, a requisição deve
 ser criptografada
-* Deve ter alertas ao usuário (ex: registrado com 
+✓ Deve ter alertas ao usuário (ex: registrado com 
 sucesso)

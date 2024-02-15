@@ -48,14 +48,14 @@ class PersonController {
         cpf,
         birth,
         gym,
-        height: null,
-        weight: null,
-        objective: null,
-        experience: null,
-        frequency: null,
-        sheet: null,
-        trainingTime: null,
-        isFirst: false,
+        height: 0,
+        weight: 0,
+        objective: "",
+        experience: "",
+        frequency: 0,
+        sheet: [""],
+        trainingTime: 0,
+        isFirst: true,
       });
 
       if (await UserController.create(person, null)) {
@@ -102,6 +102,7 @@ class PersonController {
       } = req.body;
 
       if (!id) return res.status(400).json({ message: "O id é obrigatório" });
+
       const exist = await Person.findOne({ _id: id });
       if (!exist) res.status(400).json({ message: "Usuário não encontrado" });
       if (!height)
@@ -121,16 +122,20 @@ class PersonController {
 
       //requisição python
 
-      Person.findByIdAndUpdate(id, {
-        height: height,
-        weight: weight,
+      console.log(req.body);
+      console.log(id);
+
+      await Person.findByIdAndUpdate(id, {
+        height: parseFloat(height),
+        weight: parseFloat(weight),
         objective: objective,
         experience: experience,
-        frequency: frequency,
-        // sheet: python,
-        trainingTime: trainingTime,
+        frequency: parseFloat(frequency),
+        // sheet: python, // Se `python` é uma variável contendo um valor para `sheet`, descomente esta linha
+        trainingTime: parseFloat(trainingTime),
         isFirst: false,
       });
+      return res.status(200).send();
     } catch (error) {
       return res.status(500).send({ message: error });
     }
